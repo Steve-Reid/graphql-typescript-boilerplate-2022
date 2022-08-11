@@ -1,15 +1,16 @@
-# Create Next App Starter
+# Create Next App Starter with Tailwind
 
-A Nextjs starter project
+A Nextjs starter project built with Typscript and TailwindCSS
 
 
 ## Tech Stack
 
 - [NextJS v12](https://nextjs.org/) project - bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-- React & React DOM v18
-- Type Checker - TypeScript v4.7.4
-- Lint - ESlint v8, AirBnB & Eslint-config-next
-- Format - Prettier
+- [React & React DOM](https://reactjs.org) v18
+- Styling - [TailwindCSS](https://tailwindcss.com/docs/installation) v3.1.8
+- Type Checker - [TypeScript](https://www.typescriptlang.org) v4.7.4
+- Lint - [ESlint](https://nextjs.org/docs/basic-features/eslint) v8, [AirBnB config](https://airbnb.io/javascript) & [Eslint-config-next](https://nextjs.org/docs/basic-features/eslint#eslint-config)
+- Format - [Prettier](https://prettier.io) v2.7.1
 
 ## Usage
 

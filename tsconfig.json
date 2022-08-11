@@ -16,6 +16,12 @@
     "incremental": true,
     "baseUrl": "src"
   },
-  "include": ["next-env.d.ts", "./src/**/*.ts", "./src/**/*.tsx", ".eslintrc.js"],
+  "include": [
+    "next-env.d.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    ".eslintrc.js",
+    "tailwind.config.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -13,6 +13,7 @@ const Home: NextPage = () => (
 
     <main className={styles.main}>
       <h1 className={styles.title}>Create Next App Starter</h1>
+      <h2 className="text-3xl font-bold underline">With Tailwind</h2>
     </main>
 
     <footer className={styles.footer}>
