@@ -5,7 +5,11 @@ export const testQuery = extendType({
   definition: t => {
     t.boolean('test', {
       args: { bool: nonNull(booleanArg()) },
-      resolve: (_, { bool }) => bool
+      resolve: async (_, { bool }, { prisma }) => {
+        const users = await prisma.user.findMany();
+        console.log('🚀 ~ file: types.ts ~ line 10 ~ resolve: ~ users', users);
+        return bool;
+      }
     });
   }
 });
