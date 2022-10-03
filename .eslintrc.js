@@ -13,6 +13,8 @@ module.exports = {
   },
   plugins: ['prettier'],
   rules: {
+    'consistent-return': 0,
+    'global-require': 0,
     'no-var': 0,
     'prefer-destructuring': 0,
     'prettier/prettier': 'error',
@@ -28,6 +30,9 @@ module.exports = {
         devDependencies: true
       }
     ],
+    'no-underscore-dangle': 0,
+    'no-param-reassign': 0,
+    '@typescript-eslint/naming-convention': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
