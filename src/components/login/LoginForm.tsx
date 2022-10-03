@@ -9,9 +9,10 @@ import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import LoginInput from './LoginInput';
 
-const Register = () => {
+const LoginForm = () => {
   const router = useRouter();
 
   return (
@@ -30,9 +31,6 @@ const Register = () => {
           password: Yup.string()
             .required('Password is required')
             .min(6, 'Password too short'),
-          confirmation: Yup.string()
-            .required('Passwords confirmation is required')
-            .oneOf([Yup.ref('password'), null], 'Passwords must match'),
           email: Yup.string()
             .required('Email is required')
             .email('Invalid email')
@@ -44,25 +42,22 @@ const Register = () => {
       >
         <VStack h="100%" justify="center">
           <VStack as={Form} shadow="2xl" w="100%" bg="gray.50" p="4">
-            <Heading>Register</Heading>
+            <Heading>Login</Heading>
             <LoginInput name="email" label="Email" />
             <LoginInput name="username" label="Username" />
             <LoginInput name="password" label="Password" type="password" />
-            <LoginInput
-              name="confirmation"
-              label="Confirm Password"
-              type="password"
-            />
+
             <ButtonGroup colorScheme="purple" w="100%" size="lg" pt="4">
               <Button
                 w="100%"
                 variant="outline"
-                onClick={() => router.push('/login')}
+                onClick={() => router.back()}
+                leftIcon={<ArrowBackIcon />}
               >
-                Login
+                Back
               </Button>
               <Button type="submit" w="100%">
-                Sign Up
+                Login
               </Button>
             </ButtonGroup>
           </VStack>
@@ -72,4 +67,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default LoginForm;
