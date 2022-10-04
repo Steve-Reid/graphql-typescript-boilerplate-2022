@@ -37,7 +37,6 @@ const httpLink = new HttpLink({
 
 function createIsomorphicLink(ctx: SchemaContext | undefined) {
   if (typeof window === 'undefined') {
-    if (!ctx) throw new Error('Context not passed in!');
     const { schema } = require('../modules/graphql/schema');
     return new SchemaLink({
       schema,
