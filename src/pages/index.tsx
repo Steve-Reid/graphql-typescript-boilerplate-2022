@@ -1,8 +1,7 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
-import { gql, useQuery } from '@apollo/client';
 import { TestDocument, useTestQuery } from '../../generated/graphql';
-import { addApolloState, initializeApollo } from '../../lib/apolloClient';
-import { prisma } from '../../lib/prisma';
+import { addApolloState, initializeApollo } from '../lib/apolloClient';
+import { prisma } from '../lib/prisma';
 import Register from '../components/login/Register';
 
 const Home: NextPage = () => {
