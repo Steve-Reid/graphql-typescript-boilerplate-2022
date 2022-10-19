@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "npm run generate",
+    "build:nexus-typegen": "ts-node --transpile-only src/modules/graphql/schema.ts",
+    "predev": "yarn run build:nexus-typegen && yarn run generate",
     "dev": "next dev",
-    "prebuild": "npm run generate",
+    "prebuild": "yarn run build:nexus-typegen && yarn run generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -60,7 +61,7 @@
     "@graphql-codegen/typescript-operations": "2.3.5"
   },
   "prisma": {
-    "schema": "modules/prisma/schema.prisma",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./modules/prisma/seed.ts"
+    "schema": "src/modules/prisma/schema.prisma",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/modules/prisma/seed.ts"
   }
 }

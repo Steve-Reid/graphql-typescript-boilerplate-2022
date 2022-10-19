@@ -13,6 +13,13 @@ module.exports = {
   },
   plugins: ['prettier'],
   rules: {
+    'arrow-parens': [
+      'error',
+      'as-needed',
+      {
+        requireForBlockBody: false
+      }
+    ],
     'consistent-return': 0,
     'global-require': 0,
     'no-var': 0,
@@ -32,18 +39,24 @@ module.exports = {
     ],
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
+    'no-unused-vars': [
+      'warn',
+      {
+        varsIgnorePattern: '(^_[a-z]|^_)',
+        argsIgnorePattern: '(^_[a-z]|^_)'
+      }
+    ],
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        varsIgnorePattern: '(^_[a-z]|^_)',
+        argsIgnorePattern: '(^_[a-z]|^_)'
+      }
+    ],
     '@typescript-eslint/naming-convention': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    '@typescript-eslint/no-non-null-assertion': 0,
-    'no-unused-vars': 'off',
-    'arrow-parens': [
-      'error',
-      'as-needed',
-      {
-        requireForBlockBody: false
-      }
-    ]
+    '@typescript-eslint/no-non-null-assertion': 0
   },
   settings: {
     'import/resolver': {
