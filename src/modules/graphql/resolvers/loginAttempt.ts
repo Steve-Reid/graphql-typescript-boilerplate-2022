@@ -39,34 +39,24 @@ export const loginAttempt: FieldResolver<'Mutation', 'login'> = async (
   { credentials },
   { res, prisma }
 ) => {
-  try {
-    await registrationValidation.validate(credentials);
-    const existingUser = await getExistingUser(credentials, prisma);
-    const tokenPayload = {
-      username: credentials.username
-    };
+  await registrationValidation.validate(credentials);
+  const existingUser = await getExistingUser(credentials, prisma);
+  const tokenPayload = {
+    username: credentials.username
+  };
 
-    const token = await createToken(tokenPayload, {
-      expiresIn: '1m'
-    });
+  const token = await createToken(tokenPayload, {
+    expiresIn: '1m'
+  });
 
-    nookies.set({ res }, 'sid', token, {
-      httpOnly: true,
-      domain: process.env.SERVER_DOMAIN || undefined,
-      maxAge: 60 * 5,
-      sameSite: true
-    } as CookieSerializeOptions);
+  nookies.set({ res }, 'sid', token, {
+    httpOnly: true,
+    domain: process.env.SERVER_DOMAIN || undefined,
+    maxAge: 60 * 5,
+    sameSite: true
+  } as CookieSerializeOptions);
 
-    return {
-      error: false,
-      username: existingUser.username
-    };
-  } catch (err) {
-    const errMsg = (err as ValidationError).message || 'Login attempt failed!';
-
-    return {
-      error: true,
-      message: errMsg
-    };
-  }
+  return {
+    username: existingUser.username
+  };
 };

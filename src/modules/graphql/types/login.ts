@@ -6,15 +6,12 @@ const RegisterResponse = objectType({
   name: 'registerResponse',
   definition: t => {
     t.nonNull.string('message');
-    t.nonNull.boolean('error');
   }
 });
 
 const LoginResponse = objectType({
   name: 'loginResponse',
   definition: t => {
-    t.string('message');
-    t.nonNull.boolean('error');
     t.string('username');
   }
 });
