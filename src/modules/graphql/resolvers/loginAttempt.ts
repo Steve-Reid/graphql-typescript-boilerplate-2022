@@ -53,7 +53,8 @@ export const loginAttempt: FieldResolver<'Mutation', 'login'> = async (
     httpOnly: true,
     domain: process.env.SERVER_DOMAIN || undefined,
     maxAge: 60 * 5,
-    sameSite: true
+    sameSite: true,
+    path: '/'
   } as CookieSerializeOptions);
 
   return {
