@@ -27,9 +27,10 @@ const Home: NextPage = () => {
 };
 
 export const getServerSideProps = async ({
-  req
+  req,
+  res
 }: GetServerSidePropsContext) => {
-  const apolloClient = initializeApollo({ ctx: { req, prisma } });
+  const apolloClient = initializeApollo({ ctx: { req, res, prisma } });
 
   await apolloClient.query({ query: TestDocument });
 
