@@ -1,42 +1,53 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
-import { TestDocument, useTestQuery } from '../../generated/graphql';
-import { addApolloState, initializeApollo } from '../lib/apolloClient';
+import { Heading } from '@chakra-ui/react';
+import nookies from 'nookies';
+import {
+  ImplicitLoginDocument,
+  ImplicitLoginQuery
+} from '../../generated/graphql';
+import { initializeApollo } from '../lib/apolloClient';
 import { prisma } from '../lib/prisma';
 import Register from '../components/login/Register';
 
-const Home: NextPage = () => {
-  // the result of this query is already available in the apolloClient cache
-  const { loading, data } = useTestQuery({
-    notifyOnNetworkStatusChange: true
-  });
+interface HomeProps {
+  username: string;
+  loggedIn: boolean;
+}
 
-  if (loading) {
-    console.log('HAD TO LOAD!', typeof window === 'undefined');
-  } else {
-    console.log('NOT LOADING!', typeof window === 'undefined');
-  }
-
-  return (
-    <>
-      <div>{JSON.stringify(data?.test, null, 2)}</div>
-      <div>
-        <Register />
-      </div>
-    </>
-  );
-};
+const Home: NextPage<HomeProps> = ({ loggedIn, username }) =>
+  loggedIn ? <Heading>Welcome {username}</Heading> : <Register />;
 
 export const getServerSideProps = async ({
   req,
   res
 }: GetServerSidePropsContext) => {
-  const apolloClient = initializeApollo({ ctx: { req, res, prisma } });
+  const cookies = nookies.get({ req });
+  if (!cookies.sid) {
+    return {
+      props: { loggedIn: false } as HomeProps
+    };
+  }
 
-  await apolloClient.query({ query: TestDocument });
-
-  return addApolloState(apolloClient, {
-    props: {}
+  const apolloClient = initializeApollo({
+    ctx: { req, res, prisma }
   });
+
+  const { data } = await apolloClient.query<ImplicitLoginQuery>({
+    query: ImplicitLoginDocument
+  });
+
+  console.log('DATA: ', data);
+
+  if (!data.implicitLogin?.loggedIn) {
+    return { props: { loggedIn: false } as HomeProps };
+  }
+
+  return {
+    props: {
+      username: data.implicitLogin?.username,
+      loggedIn: data.implicitLogin?.loggedIn
+    } as HomeProps
+  };
 };
 
 export default Home;

@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import { FieldResolver } from 'nexus';
-import { ValidationError } from 'apollo-server-micro';
 import { compare } from 'bcryptjs';
 import nookies from 'nookies';
 import { CookieSerializeOptions } from 'next/dist/server/web/types';
